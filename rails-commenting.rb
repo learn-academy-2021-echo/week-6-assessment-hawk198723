@@ -6,25 +6,25 @@
 
 # FILE: app/controller/blog_posts_controller.rb
 
-# ---1)
+# ---1) Build a class called BlogPostsController and it inherits the methods of ApplicationController. Such as the logic methods for the RESTful routes.
 class BlogPostsController < ApplicationController
   def index
-    # ---2)
+    # ---2)create an instance, store all the data from table BlogPost
     @posts = BlogPost.all
   end
 
   def show
-    # ---3)
+    # ---3)create a single instance, use find to search the object by ID and store it in the instance.
     @post = BlogPost.find(params[:id])
   end
 
-  # ---4)
+  # ---4)use new to create a empty hash object and store it in the instance.
   def new
     @post = BlogPost.new
   end
 
   def create
-    # ---5)
+    # ---5)create a valid object with strong strict param .
     @post = BlogPost.create(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -33,14 +33,14 @@ class BlogPostsController < ApplicationController
     end
   end
 
-  # ---6)
+  # ---6) this edit method will be responsible for edit a hash object by ID
   def edit
     @post = BlogPost.find(params[:id])
   end
 
   def update
     @post = BlogPost.find(params[:id])
-    # ---7)
+    # ---7)update the object by strong strict blog_post_params argument
     @post.update(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -54,15 +54,15 @@ class BlogPostsController < ApplicationController
     if @post.destroy
       redirect_to blog_posts_path
     else
-      # ---8)
+      # ---8)if it doesn't delete successfully, it will redirect page to blog_post path
       redirect_to blog_post_path(@post)
     end
   end
 
-  # ---9)
+  # ---9)anything below key word private will only can be accessable within class BlogPostsController
   private
   def blog_post_params
-    # ---10)
+    # ---10)The params requires an argument :blog_post object, and returns values pertaining :title and :content. Allows the user access to a set of information in the table.
     params.require(:blog_post).permit(:title, :content)
   end
 end
