@@ -14,17 +14,17 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-    # ---3)create a single instance, use find to search the object by ID and store it in the instance.
+    # ---3)create a single instance, use find to search the object by ID and store it in the instance in the url.
     @post = BlogPost.find(params[:id])
   end
 
-  # ---4)use new to create a empty hash object and store it in the instance.
+  # ---4)(a method named new)----use new to create a empty hash object and store it in the instance.
   def new
     @post = BlogPost.new
   end
 
   def create
-    # ---5)create a valid object with strong strict param .
+    # ---5)create a valid object with strong strict param . will "POST"
     @post = BlogPost.create(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -54,7 +54,7 @@ class BlogPostsController < ApplicationController
     if @post.destroy
       redirect_to blog_posts_path
     else
-      # ---8)if it doesn't delete successfully, it will redirect page to blog_post path
+      # ---8)if it doesn't delete successfully, it will reroute page to blog_post path
       redirect_to blog_post_path(@post)
     end
   end

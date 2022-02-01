@@ -9,9 +9,7 @@ Then, research the question to expand on your answer. Even if you feel you have 
 
   Your answer: Use migration to add the foreign key. The name of the foreign key add_column_to_students. The foreign key should be on the Student model.
 
-  Researched answer: A rails generate migration add_column_to_students should be called in the terminal to add a column to the Student Model. The column added should have the name of cohort_id.
-
-
+  Researched answer: A developer can update a database to include a foreign key by first creating a migration. The migration should reference the change that is being made (editing a column, updating a column, etc), and then add the code required to perform the change in the migration file. After the migration file has been updating to include the correct code, the user inputs rails db:migrate into the console to update the schema. The foreign key would be named student_id. The foreign key would be located on the Student model as a student can have only one cohort, but the Cohort model will have many students.
 
 2. Which RESTful routes must always be passed params? Why?
 
@@ -19,10 +17,8 @@ Then, research the question to expand on your answer. Even if you feel you have 
 
   Researched answer:
 
-  Create is a RESTful route that submits user data to the database.
-
-  Show is a RESTful route that looks for one item in the database. This is done by accessing the id of the item. Inside the show method we will make an Active Record call that will find one item by id. This id will come from the url params.
-
+ The RESTful routes that always need to be passed params are `show`, `update`, `destroy`. The reason is because
+ those methods would need to know what hashes the user wants to execute upon while `index` is everything and `create` is making something completely new.
 
 
 3. Name three rails generator commands. What is created by each?
@@ -38,23 +34,33 @@ Then, research the question to expand on your answer. Even if you feel you have 
    Controller: The Rails controller creates ruby file, and it's the logical center of your application. It coordinates the interaction between the user, the views, and the model.  
    Resource:
 
+DF: rails g migration: Migrations are a feature of Active Record that allows you to evolve your database schema over time. 
+  Rather than write schema modifications in pure SQL, migrations allow you to use a Ruby DSL to describe changes to your tables.
+
+  rails g model: A Rails Model is a Ruby class that can add database records (think of whole rows in an Excel table), 
+  find particular data you're looking for, update that data, or remove data.
+
+  rails g controller: The Rails controller is the logical center of your application. 
+  It coordinates the interaction between the user, the views, and the model. The controller 
+  is also a home to a number of important ancillary services. It is responsible for routing external requests to internal actions.
 
 
-4. Consider the Rails routes below. What is the name of the controller method that would be called by each route? What action would each of the controller methods perform?
+4. Consider the Rails routes below. What is the name of the controller method that would be 
+called by each route? What action would each of the controller methods perform?
 
-action: "GET"    route: /students  --> index method --> display a list of all the students       
+action: "GET"    route: /students  --> index method --> display a list of all the students  -->def index - returns all the entries in the students table      
 
-action: "POST"   route: /students --> create method  --> create a new student
+action: "POST"   route: /students --> create method  --> create a new student --> def create- create a new instance in the BD table students
 
-action: "GET"    route: /students/new --> new method --> return an HTML form for creating a new student
+action: "GET"    route: /students/new --> new method --> return an HTML form for creating a new student return a form that we will use to create a student
 
-action: "GET"    route: /students/2 --> show method --> display a specific student by ID:2
+action: "GET"    route: /students/2 --> show method --> display a specific student by ID:2 - return an instance of the students table with the ID of 2
 
-action: "GET"    route: /students/2/edit --> edit method -->  return an HTML form for editing ID:2 student
+action: "GET"    route: /students/2/edit --> edit method -->  return an HTML form for editing ID:2 student --return a form where a user can edit the information of student ID 2
 
-action: "PATCH"  route: /students/2 --> update method -->  update a specific student by ID: 2
+action: "PATCH"  route: /students/2 --> update method -->  update a specific student by ID: 2 --update the instance of student table where ID =2
 
-action: "DELETE" route: /students/2 --> destroy method -->  deletes a specific student by ID: 2
+action: "DELETE" route: /students/2 --> destroy method -->  deletes a specific student by ID: 2 -- 
 
 
 
